@@ -1,28 +1,29 @@
 #cp-extension-box {
   position: fixed;
-  top: 60px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
   z-index: 10000;
-  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
-  box-shadow: 0 4px 16px rgba(37,99,235,0.13);
-  border-radius: 10px;
-  max-width: 210px;
-  min-width: 180px;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  transition: height 0.3s ease;
-  border: 1.5px solid #2563EB;
+  background: white;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.2);
+  border-radius: 12px;
+  width: 300px;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  transition: all 0.3s ease;
+  border: 1px solid #2563eb;
 }
-#cp-extension-box.collapsed {
-  height: auto;
-  max-height: 38px;
-  overflow: hidden;
+#cp-extension-box.collapsed .content {
+  display: none !important;
+}
+#cp-extension-box .clock-row {
+  /* Always keep clock visible */
+  display: flex !important;
 }
 #cp-extension-box header {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 6px 10px;
-  background: linear-gradient(90deg, #2563EB 0%, #60a5fa 100%);
+  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
   color: #fff;
   cursor: move;
   border-top-left-radius: 10px;
@@ -30,7 +31,7 @@
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.2px;
-  box-shadow: 0 1px 4px rgba(37,99,235,0.10);
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.1);
   min-height: 38px;
   position: relative;
 }
@@ -69,6 +70,7 @@
 }
 #cp-extension-box button.toggle-btn:hover {
   color: #dbeafe;
+  transform: translateY(-40%);
 }
 #cp-extension-box .content {
   padding: 8px 10px 10px 10px;
@@ -78,7 +80,7 @@
 }
 #cp-extension-box button,
 #cp-extension-box select {
-  background: linear-gradient(90deg, #2563EB 0%, #60a5fa 100%);
+  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
   color: #fff;
   border: none;
   border-radius: 7px;
@@ -88,8 +90,13 @@
   font-family: inherit;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 2px rgba(37,99,235,0.10);
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.1);
   font-weight: 600;
+}
+#cp-extension-box button:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
 }
 #cp-extension-box button:disabled {
   background: #cbd5e1;
@@ -99,7 +106,7 @@
 }
 #cp-extension-box button:hover:not(:disabled),
 #cp-extension-box select:hover {
-  background: linear-gradient(90deg, #60a5fa 0%, #2563EB 100%);
+  background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
 }
 #cp-extension-box .content {
   display: flex;
@@ -112,11 +119,11 @@
   max-height: 48px;
   box-sizing: border-box;
   border-radius: 7px;
-  border: 1px solid #2563EB;
+  border: 1px solid #2563eb;
   padding: 4px;
   font-size: 0.93rem;
   background: #f1f5f9;
-  color: #2563EB;
+  color: #2563eb;
   resize: vertical;
   margin-bottom: 2px;
   transition: border 0.2s, background 0.2s;
@@ -127,10 +134,19 @@
   outline: none;
   background: #e0e7ef;
 }
+#cp-extension-box input[type="number"] {
+  border: 1px solid #cfd7e6;
+  border-radius: 4px;
+}
+#cp-extension-box input[type="number"]:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
 #cp-extension-box select {
   background: #f1f5f9;
-  color: #2563EB;
-  border: 1px solid #2563EB;
+  color: #2563eb;
+  border: 1px solid #2563eb;
   border-radius: 7px;
   padding: 4px 8px;
   font-size: 0.93rem;
@@ -146,8 +162,42 @@
 #cp-stopwatch-display {
   font-size: 1rem;
   font-weight: 700;
-  color: #2563EB;
+  color: #2563eb;
   margin: 4px 0 2px 0;
   letter-spacing: 1px;
   text-shadow: 0 1px 2px #e0e7ef;
+}
+
+/* Add more styles */
+#cp-extension-box * {
+  transition: all 0.2s ease-out;
+}
+
+/* Make header more grabbable */
+#cp-extension-box header {
+  cursor: grab;
+}
+
+#cp-extension-box header:active {
+  cursor: grabbing;
+}
+
+/* Add scrollbar styling */
+#cp-bookmarks-section {
+  scrollbar-width: thin;
+  scrollbar-color: #2563eb #f1f5f9;
+}
+
+#cp-bookmarks-section::-webkit-scrollbar {
+  width: 8px;
+}
+
+#cp-bookmarks-section::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+#cp-bookmarks-section::-webkit-scrollbar-thumb {
+  background-color: #2563eb;
+  border-radius: 4px;
 }
