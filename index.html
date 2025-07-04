@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CodeOTC</title>
+    <style>
+      body { font-family: sans-serif; padding: 10px; background: #f8fafc; }
+      .logo {
+        display: block;
+        margin: 0 auto 16px auto;
+        width: 64px;
+        height: 64px;
+      }
+      .bookmark {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px #0001;
+        margin-bottom: 14px;
+        padding: 10px 14px;
+        transition: box-shadow 0.2s;
+      }
+      .bookmark:hover {
+        box-shadow: 0 2px 8px #2563eb33;
+      }
+      .bookmark-title {
+        font-weight: bold;
+        color: #2563EB;
+        font-size: 1.08em;
+        text-decoration: none;
+      }
+      .bookmark-status {
+        font-size: 0.95em;
+        color: #fff;
+        background: #2563EB;
+        border-radius: 4px;
+        padding: 1px 7px;
+        margin-left: 8px;
+      }
+      .bookmark-note {
+        display: block;
+        margin: 6px 0 2px 0;
+        color: #222;
+        font-size: 0.98em;
+      }
+      .bookmark-date {
+        color: #888;
+        font-size: 0.85em;
+      }
+      #bookmarkList { list-style: none; padding: 0; }
+    </style>
+  </head>
+  <body>
+    <img src="icon.png" alt="CodeOTC Logo" class="logo" />
+    <h2>📘 Bookmarks</h2>
+    <ul id="bookmarkList"></ul>
+    <script>
+      chrome.storage.sync.get(["cp_bookmarks"], (res) => {
+        const bookmarks = res.cp_bookmarks || [];
+        const list = document.getElementById("bookmarkList");
+        if (bookmarks.length === 0) {
+          list.innerHTML = '<li style="color:#888;">No bookmarks yet.</li>';
+        }
+        bookmarks.slice().reverse().forEach(b => {
+          const li = document.createElement("li");
+          li.className = "bookmark";
+          li.innerHTML = `
+            <a href="${b.url}" class="bookmark-title" target="_blank">${b.title}</a>
+            <span class="bookmark-status">${b.status}</span><br/>
+            <span class="bookmark-note">${b.note ? b.note : '<i>No note</i>'}</span>
+            <span class="bookmark-date">${new Date(b.date).toLocaleString()}</span>
+          `;
+          list.appendChild(li);
+        });
+      });
+    </script>
+  </body>
+</html>

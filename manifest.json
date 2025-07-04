@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "CodeOTC",
+  "version": "1.2",
+  "description": "Competitive Programming Companion for LeetCode and Codeforces",
+  "permissions": ["storage", "scripting", "tabs"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://leetcode.com/problems/*",
+        "*://codeforces.com/problemset/problem/*"
+      ],
+      "js": ["content.js"],
+      "css": ["contentstyle.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}
